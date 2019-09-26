@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+  pocket-archiver:
+    build:
+      context: ../pocket-archiver/
+    restart: always
+    image: pocket-archiver
+    volumes:
+      - "${HOME}/data/:/data/:delegated"
+    secrets:
+      - POCKET_ACCESS_TOKEN
+      - POCKET_CONSUMER_KEY
+    depends_on:
+      - fullfeedrss
+
+  spoiler-vskm:
+    build:
+      context: ../spoiler-vskm/
+    restart: always
+    image: spoiler-vskm
+    volumes:
+      - type: bind
+        source: ${HOME}/data/news-retrieval/news.db
+        target: /news.db
+        consistency: cached
+        read_only: true
+      - type: bind
+        source: ${HOME}/data/spoiler-vksm/
+        target: /data/
+        consistency: cached
+        read_only: false
+    secrets:
+      - POCKET_ACCESS_TOKEN
+      - POCKET_CONSUMER_KEY
+
+  newsboat:
+    image: heussd/newsboat
+    restart: always
+    volumes:
+      - '${HOME}/data/news-retrieval:/data-to-copy/:delegated'
+      - '${HOME}/data/news-retrieval/urls:/data/urls:delegated'
+    depends_on:
+      - fullfeedrss
+    environment:
+      - RELOAD_EVERY=6h
+
+  fullfeedrss:
+    restart: always
+    image: "heussd/fivefilters-full-text-rss"
+    volumes:
+      - rss-cache:/var/www/html/cache"
+
+volumes:
+  rss-cache:
+
+secrets:
+  POCKET_ACCESS_TOKEN:
+    file: ${HOME}/data/POCKET_ACCESS_TOKEN.txt
+  POCKET_CONSUMER_KEY:
+    file: ${HOME}/data/POCKET_CONSUMER_KEY.txt
