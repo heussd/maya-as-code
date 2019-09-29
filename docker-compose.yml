@@ -1,23 +1,20 @@
 version: "3.7"
 services:
-  pocket-archiver:
-    build:
-      context: ../pocket-archiver/
-    restart: always
-    image: pocket-archiver
-    volumes:
-      - "${HOME}/data/:/data/:delegated"
-    secrets:
-      - POCKET_ACCESS_TOKEN
-      - POCKET_CONSUMER_KEY
-    depends_on:
-      - fullfeedrss
-
+        #  pocket-archiver:
+        #    build:
+        #      context: ../pocket-archiver/
+        #    restart: always
+        #    image: pocket-archiver
+        #    volumes:
+        #      - "${HOME}/data/:/data/:delegated"
+        #    secrets:
+        #      - POCKET_ACCESS_TOKEN
+        #      - POCKET_CONSUMER_KEY
+        #    depends_on:
+        #      - fullfeedrss
+        #
   spoiler-vskm:
-    build:
-      context: ../spoiler-vskm/
-    restart: always
-    image: spoiler-vskm
+    image: heussd/spoiler-vskm
     volumes:
       - type: bind
         source: ${HOME}/data/news-retrieval/news.db
@@ -37,8 +34,7 @@ services:
     image: heussd/newsboat
     restart: always
     volumes:
-      - '${HOME}/data/news-retrieval:/data-to-copy/:delegated'
-      - '${HOME}/data/news-retrieval/urls:/data/urls:delegated'
+      - '${HOME}/data/news-retrieval:/data/:delegated'
     depends_on:
       - fullfeedrss
     environment:
@@ -49,6 +45,22 @@ services:
     image: "heussd/fivefilters-full-text-rss"
     volumes:
       - rss-cache:/var/www/html/cache"
+
+  minidlna:
+    image: cytomich/rpi-docker-minidlna
+    restart: always
+    network_mode: host
+    volumes:
+      - '/media/:/media/'
+    environment:
+      - MINIDLNA_FRIENDLY_NAME=maya
+      - 'MINIDLNA_MEDIA_DIR=/media/'
+  portainer:
+    image: hypriot/rpi-portainer
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    ports:
+      - "9000:9000"
 
 volumes:
   rss-cache:
