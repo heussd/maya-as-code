@@ -1,18 +1,15 @@
 version: "3.7"
 services:
-        #  pocket-archiver:
-        #    build:
-        #      context: ../pocket-archiver/
-        #    restart: always
-        #    image: pocket-archiver
-        #    volumes:
-        #      - "${HOME}/data/:/data/:delegated"
-        #    secrets:
-        #      - POCKET_ACCESS_TOKEN
-        #      - POCKET_CONSUMER_KEY
-        #    depends_on:
-        #      - fullfeedrss
-        #
+  pocket-archiver:
+    image: heussd/pocket-archiver
+    volumes:
+      - "${HOME}/data/:/data/:delegated"
+    secrets:
+      - POCKET_ACCESS_TOKEN
+      - POCKET_CONSUMER_KEY
+    depends_on:
+      - fullfeedrss
+
   spoiler-vskm:
     image: heussd/spoiler-vskm
     volumes:
