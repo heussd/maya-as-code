@@ -29,7 +29,6 @@ services:
 
   newsboat:
     image: heussd/newsboat
-    restart: always
     volumes:
       - '${HOME}/data/news-retrieval:/data/:delegated'
     depends_on:
