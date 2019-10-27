@@ -10,23 +10,23 @@ services:
     depends_on:
       - fullfeedrss
 
-  spoiler-vskm:
-    image: heussd/spoiler-vskm
-    volumes:
-      - type: bind
-        source: ${HOME}/data/news-retrieval/news.db
-        target: /news.db
-        consistency: cached
-        read_only: true
-      - type: bind
-        source: ${HOME}/data/spoiler-vksm/
-        target: /data/
-        consistency: cached
-        read_only: false
-    secrets:
-      - POCKET_ACCESS_TOKEN
-      - POCKET_CONSUMER_KEY
-
+        #  spoiler-vskm:
+        #    image: heussd/spoiler-vskm
+        #    volumes:
+        #      - type: bind
+        #        source: ${HOME}/data/news-retrieval/news.db
+        #        target: /news.db
+        #        consistency: cached
+        #        read_only: true
+        #      - type: bind
+        #        source: ${HOME}/data/spoiler-vksm/
+        #        target: /data/
+        #        consistency: cached
+        #        read_only: false
+        #    secrets:
+        #      - POCKET_ACCESS_TOKEN
+        #      - POCKET_CONSUMER_KEY
+        #
   newsboat:
     image: heussd/newsboat
     volumes:
@@ -51,13 +51,13 @@ services:
     environment:
       - MINIDLNA_FRIENDLY_NAME=maya
       - 'MINIDLNA_MEDIA_DIR=/media/'
-  portainer:
-    image: hypriot/rpi-portainer
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-    ports:
-      - "9000:9000"
-
+        #  portainer:
+        #    image: hypriot/rpi-portainer
+        #    volumes:
+        #      - '/var/run/docker.sock:/var/run/docker.sock'
+        #    ports:
+        #      - "9000:9000"
+        #
 volumes:
   rss-cache:
 
