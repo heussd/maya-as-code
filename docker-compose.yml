@@ -47,7 +47,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - '/media/TIMMSTICK/media (copy, can be deleted)/:/media/'
+      - '/media/TIMMSTICK/media-copy-can-be-deleted/:/media/'
     environment:
       - MINIDLNA_FRIENDLY_NAME=maya
       - 'MINIDLNA_MEDIA_DIR=/media/'
