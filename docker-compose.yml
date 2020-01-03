@@ -10,8 +10,8 @@ services:
     depends_on:
       - fullfeedrss
 
-  spoiler-vskm:
-    image: heussd/spoiler-vskm
+  spoiler-keyword-matcher:
+    image: heussd/spoiler-keyword-matcher
     volumes:
       - type: bind
         source: ${HOME}/data/news-retrieval/news.db
@@ -19,7 +19,7 @@ services:
         consistency: cached
         read_only: true
       - type: bind
-        source: ${HOME}/data/spoiler-vksm/
+        source: ${HOME}/data/spoiler-keyword-matcher/
         target: /data/
         consistency: cached
         read_only: false
