@@ -3,7 +3,11 @@ services:
   pocket-archiver:
     image: heussd/pocket-archiver
     volumes:
-      - "${HOME}/data/:/data/:delegated"
+      - type: bind
+        source: ${HOME}/data/pocket-archiver/
+        target: /app/data/
+        consistency: delegated 
+        read_only: false
     secrets:
       - POCKET_ACCESS_TOKEN
       - POCKET_CONSUMER_KEY
