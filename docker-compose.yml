@@ -38,7 +38,7 @@ services:
 
   fullfeedrss:
     restart: always
-    image: "heussd/fivefilters-full-text-rss"
+    image: "heussd/fivefilters-full-text-rss:3.8.1"
     volumes:
       - rss-cache:/var/www/html/cache"
 
