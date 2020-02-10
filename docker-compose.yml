@@ -14,8 +14,8 @@ services:
     depends_on:
       - fullfeedrss
 
-  spoiler-keyword-matcher:
-    image: heussd/spoiler-keyword-matcher
+  newsboat-keyword-matcher:
+    image: heussd/newsboat-keyword-matcher
     volumes:
       - type: bind
         source: ${HOME}/data/news-retrieval/news.db
