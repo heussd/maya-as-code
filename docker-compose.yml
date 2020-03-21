@@ -38,7 +38,7 @@ services:
     depends_on:
       - fullfeedrss
     environment:
-      - RELOAD_EVERY=6h
+      - RELOAD_EVERY=12h
 
   fullfeedrss:
     restart: always
