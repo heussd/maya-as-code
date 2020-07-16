@@ -1,51 +1,5 @@
 version: "3.7"
 services:
-  pocket-archiver:
-    image: heussd/pocket-archiver
-    volumes:
-      - type: bind
-        source: ${HOME}/data/pocket-archiver/
-        target: /app/data/
-        consistency: delegated 
-        read_only: false
-    secrets:
-      - POCKET_ACCESS_TOKEN
-      - POCKET_CONSUMER_KEY
-    depends_on:
-      - fullfeedrss
-
-  newsboat-keyword-matcher:
-    image: heussd/newsboat-keyword-matcher
-    volumes:
-      - type: bind
-        source: ${HOME}/data/news-retrieval/news.db
-        target: /news.db
-        consistency: cached
-        read_only: true
-      - type: bind
-        source: ${HOME}/data/spoiler-keyword-matcher/
-        target: /data/
-        consistency: cached
-        read_only: false
-    secrets:
-      - POCKET_ACCESS_TOKEN
-      - POCKET_CONSUMER_KEY
-
-  newsboat:
-    image: heussd/newsboat
-    volumes:
-      - '${HOME}/data/news-retrieval:/data/:delegated'
-    depends_on:
-      - fullfeedrss
-    environment:
-      - RELOAD_EVERY=12h
-
-  fullfeedrss:
-    restart: always
-    image: "heussd/fivefilters-full-text-rss:3.8.1"
-    volumes:
-      - rss-cache:/var/www/html/cache"
-
   minidlna:
     image: cytomich/rpi-docker-minidlna
     restart: always
@@ -88,11 +42,3 @@ services:
         #    network_mode: host
         #    restart: unless-stopped
 
-volumes:
-  rss-cache:
-
-secrets:
-  POCKET_ACCESS_TOKEN:
-    file: ${HOME}/data/POCKET_ACCESS_TOKEN.txt
-  POCKET_CONSUMER_KEY:
-    file: ${HOME}/data/POCKET_CONSUMER_KEY.txt
