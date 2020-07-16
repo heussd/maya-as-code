@@ -1,5 +1,12 @@
 version: "3.7"
 services:
+  samba:
+    image: pwntr/samba-alpine
+    restart: always
+    network_mode: host
+    volumes:
+      - '/media/TIMMSTICK/media-copy-can-be-deleted/:/shared'
+      - '${PWD}/smb.conf:/config/smb.conf'
   minidlna:
     image: cytomich/rpi-docker-minidlna
     restart: always
