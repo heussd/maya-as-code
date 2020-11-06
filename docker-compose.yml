@@ -40,7 +40,7 @@ services:
    environment:
      TZ: 'Europe/Berlin'
      WEBPASSWORD: 'letmein'
-     ServerIP: '192.168.178.29'
+     ServerIP: '192.168.178.10'
    # Volumes store your data between container upgrades
    volumes:
      - './etc-pihole/:/etc/pihole/'
