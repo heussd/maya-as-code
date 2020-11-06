@@ -1,21 +1,26 @@
 version: "3.7"
 services:
-  samba:
-    image: pwntr/samba-alpine
-    restart: always
-    network_mode: host
-    volumes:
-      - '/media/TIMMSTICK/media-copy-can-be-deleted/:/shared'
-      - '${PWD}/smb.conf:/config/smb.conf'
-  minidlna:
-    image: cytomich/rpi-docker-minidlna
-    restart: always
-    network_mode: host
-    volumes:
-      - '/media/TIMMSTICK/media-copy-can-be-deleted/:/media/'
-    environment:
-      - MINIDLNA_FRIENDLY_NAME=maya
-      - 'MINIDLNA_MEDIA_DIR=/media/'
+        #  samba:
+        #    image: trnape/rpi-samba
+        #    #   network_mode: host
+        #    ports:
+        #      - 445:445
+        #    volumes:
+        #      - '/media/TIMMSTICK/media-copy-can-be-deleted/:/shared/data/'
+        #    command:
+        #      - -u
+        #      - "guest:guest"
+        #      - -s
+        #      - "data (readonly):/shared/data/:ro:guest"
+        # minidlna:
+        #   image: cytomich/rpi-docker-minidlna
+        #   restart: always
+        #   network_mode: host
+        #   volumes:
+        #     - '/media/TIMMSTICK/media-copy-can-be-deleted/:/media/'
+        #   environment:
+        #     - MINIDLNA_FRIENDLY_NAME=maya
+        #     - 'MINIDLNA_MEDIA_DIR=/media/'
         #  portainer:
         #    image: hypriot/rpi-portainer
         #    volumes:
@@ -23,29 +28,29 @@ services:
         #    ports:
         #      - "9000:9000"
         #
-        #  pihole:
-        #    container_name: pihole
-        #    image: pihole/pihole:latest
-        #    ports:
-        #      - "53:53/tcp"
-        #      - "53:53/udp"
-        #      - "67:67/udp"
-        #      - "80:80/tcp"
-        #      - "443:443/tcp"
-        #    environment:
-        #      TZ: 'Europe/Berlin'
-        #      WEBPASSWORD: 'letmein'
-        #      ServerIP: '192.168.178.29'
-        #    # Volumes store your data between container upgrades
-        #    volumes:
-        #      - './etc-pihole/:/etc/pihole/'
-        #      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-        #    dns:
-        #      - 127.0.0.1
-        #    # Recommended but not required (DHCP needs NET_ADMIN)
-        #    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-        #    #cap_add:
-        #    #  - NET_ADMIN
-        #    network_mode: host
-        #    restart: unless-stopped
+ pihole:
+   container_name: pihole
+   image: pihole/pihole:latest
+   ports:
+     - "53:53/tcp"
+     - "53:53/udp"
+     - "67:67/udp"
+     - "80:80/tcp"
+     - "443:443/tcp"
+   environment:
+     TZ: 'Europe/Berlin'
+     WEBPASSWORD: 'letmein'
+     ServerIP: '192.168.178.29'
+   # Volumes store your data between container upgrades
+   volumes:
+     - './etc-pihole/:/etc/pihole/'
+     - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+   dns:
+     - 127.0.0.1
+   # Recommended but not required (DHCP needs NET_ADMIN)
+   #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+   #cap_add:
+   #  - NET_ADMIN
+   network_mode: host
+   restart: unless-stopped
 
