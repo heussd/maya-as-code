@@ -1,33 +1,5 @@
 version: "3.7"
 services:
-        #  samba:
-        #    image: trnape/rpi-samba
-        #    #   network_mode: host
-        #    ports:
-        #      - 445:445
-        #    volumes:
-        #      - '/media/TIMMSTICK/media-copy-can-be-deleted/:/shared/data/'
-        #    command:
-        #      - -u
-        #      - "guest:guest"
-        #      - -s
-        #      - "data (readonly):/shared/data/:ro:guest"
-        # minidlna:
-        #   image: cytomich/rpi-docker-minidlna
-        #   restart: always
-        #   network_mode: host
-        #   volumes:
-        #     - '/media/TIMMSTICK/media-copy-can-be-deleted/:/media/'
-        #   environment:
-        #     - MINIDLNA_FRIENDLY_NAME=maya
-        #     - 'MINIDLNA_MEDIA_DIR=/media/'
-        #  portainer:
-        #    image: hypriot/rpi-portainer
-        #    volumes:
-        #      - '/var/run/docker.sock:/var/run/docker.sock'
-        #    ports:
-        #      - "9000:9000"
-        #
   pihole:
     labels:
       com.centurylinklabs.watchtower.scope: watchtower
