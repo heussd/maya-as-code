@@ -29,7 +29,8 @@ services:
         #      - "9000:9000"
         #
   pihole:
-    container_name: pihole
+    labels:
+      com.centurylinklabs.watchtower.scope: watchtower
     image: pihole/pihole:latest
     ports:
       - "53:53/tcp"
@@ -56,6 +57,8 @@ services:
 
   newsboat-keyword-matcher:
     image: heussd/newsboat-keyword-matcher
+    labels:
+      com.centurylinklabs.watchtower.scope: watchtower
     volumes:
       - type: bind
         source: ${HOME}/data/newsboat/news.db
@@ -80,8 +83,22 @@ services:
   fullfeedrss:
     restart: always
     image: "heussd/fivefilters-full-text-rss:latest"
+    labels:
+      com.centurylinklabs.watchtower.scope: watchtower
     volumes:
       - rss-cache:/var/www/html/cache"
+
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: |
+      --schedule "0 0 4 * * *" 
+      --cleanup
+      --stop-timeout 60s
+      --scope watchtower
+
 
 volumes:
   rss-cache:
