@@ -2,7 +2,7 @@ version: "3.7"
 services:
   pihole:
     labels:
-      com.centurylinklabs.watchtower.scope: watchtower
+      com.centurylinklabs.watchtower.scope: auto-update-plz
     image: pihole/pihole:latest
     ports:
       - "53:53/tcp"
@@ -30,7 +30,7 @@ services:
   newsboat-keyword-matcher:
     image: heussd/newsboat-keyword-matcher
     labels:
-      com.centurylinklabs.watchtower.scope: watchtower
+      com.centurylinklabs.watchtower.scope: auto-update-plz
     volumes:
       - type: bind
         source: ${HOME}/data/newsboat/news.db
@@ -56,9 +56,12 @@ services:
     restart: always
     image: "heussd/fivefilters-full-text-rss:latest"
     labels:
-      com.centurylinklabs.watchtower.scope: watchtower
+      com.centurylinklabs.watchtower.scope: auto-update-plz
     volumes:
       - rss-cache:/var/www/html/cache"
+    ports:
+      - "8080:80"
+
 
 
   watchtower:
@@ -69,7 +72,7 @@ services:
       --schedule "0 0 4 * * *" 
       --cleanup
       --stop-timeout 60s
-      --scope watchtower
+      --scope auto-update-plz
 
 
 volumes:
