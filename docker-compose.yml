@@ -1,32 +1,32 @@
 version: "3.7"
 services:
-  pihole:
-    labels:
-      com.centurylinklabs.watchtower.scope: auto-update-plz
-    image: pihole/pihole:latest
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
-      - "443:443/tcp"
-    environment:
-      TZ: 'Europe/Berlin'
-      WEBPASSWORD: 'letmein'
-      ServerIP: '192.168.178.10'
-    # Volumes store your data between container upgrades
-    volumes:
-      - './etc-pihole/:/etc/pihole/'
-      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    dns:
-      - 127.0.0.1
-    # Recommended but not required (DHCP needs NET_ADMIN)
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    #cap_add:
-    #  - NET_ADMIN
-    network_mode: host
-    restart: unless-stopped
-
+        #  pihole:
+        #    labels:
+        #      com.centurylinklabs.watchtower.scope: auto-update-plz
+        #    image: pihole/pihole:latest
+        #    ports:
+        #      - "53:53/tcp"
+        #      - "53:53/udp"
+        #      - "67:67/udp"
+        #      - "80:80/tcp"
+        #      - "443:443/tcp"
+        #    environment:
+        #      TZ: 'Europe/Berlin'
+        #      WEBPASSWORD: 'letmein'
+        #      ServerIP: '192.168.178.10'
+        #    # Volumes store your data between container upgrades
+        #    volumes:
+        #      - './etc-pihole/:/etc/pihole/'
+        #      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+        #    dns:
+        #      - 127.0.0.1
+        #    # Recommended but not required (DHCP needs NET_ADMIN)
+        #    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+        #    #cap_add:
+        #    #  - NET_ADMIN
+        #    network_mode: host
+        #    restart: unless-stopped
+        #
   newsboat-keyword-matcher:
     image: heussd/newsboat-keyword-matcher
     labels:
@@ -66,6 +66,8 @@ services:
 
   watchtower:
     image: containrrr/watchtower:latest
+    labels:
+      com.centurylinklabs.watchtower.scope: auto-update-plz
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command: |
