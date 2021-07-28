@@ -27,10 +27,12 @@ services:
         #    network_mode: host
         #    restart: unless-stopped
         #
-  newsboat-keyword-matcher:
-    image: heussd/newsboat-keyword-matcher
+  news-keyword-matcher:
+    image: heussd/news-keyword-matcher
     labels:
       com.centurylinklabs.watchtower.scope: auto-update-plz
+    environment:
+      - "RELOAD_EVERY=30m"
     volumes:
       - type: bind
         source: ${HOME}/data/newsboat/news.db
