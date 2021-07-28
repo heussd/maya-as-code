@@ -43,15 +43,21 @@ services:
         consistency: cached
         read_only: false
 
-  newsboat:
-    image: heussd/newsboat
+
+  news-retrieval:
+    image: "heussd/news-retrieval"
     volumes:
       - '${HOME}/data/newsboat:/data/:delegated'
     depends_on:
       - fullfeedrss
-    environment:
+    environment: 
+      - FIVE_FILTERS_SERVICE=fullfeedrss
       - RELOAD_EVERY=8h
+    command:
+      - "/data/urls"
+      - "/data/news.db"
 
+      
   fullfeedrss:
     restart: always
     image: "heussd/fivefilters-full-text-rss:latest"
