@@ -46,6 +46,7 @@ services:
 
   news-retrieval:
     image: "heussd/news-retrieval"
+    privileged: true # Required for sleep(!) on ARM Linux (?!)
     volumes:
       - '${HOME}/data/newsboat:/data/:delegated'
     depends_on:
