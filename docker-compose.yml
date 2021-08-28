@@ -55,7 +55,7 @@ services:
       - fullfeedrss
     environment: 
       - FIVE_FILTERS_SERVICE=fullfeedrss
-      - RELOAD_EVERY=8h
+      - RELOAD_EVERY=5h
     command:
       - "/data/urls"
       - "/data/news.db"
