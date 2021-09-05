@@ -71,6 +71,13 @@ services:
     ports:
       - "8080:80"
 
+  docker-logs-to-telegram:
+    image: heussd/pipe-to-telegram
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment: 
+      - BOT_TOKEN=${BOT_TOKEN}
+      - GROUP_ID=${GROUP_ID}
 
 
   watchtower:
