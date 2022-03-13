@@ -44,6 +44,9 @@ services:
         target: /data/
         consistency: cached
         read_only: false
+    secrets:
+      - POCKET_ACCESS_TOKEN
+      - POCKET_CONSUMER_KEY
 
 
   news-retrieval:
@@ -80,7 +83,11 @@ services:
         #      - GROUP_ID=${GROUP_ID}
 
 
-
 volumes:
   rss-cache:
 
+secrets:
+  POCKET_ACCESS_TOKEN:
+    file: ${HOME}/data/keyword-matcher/POCKET_ACCESS_TOKEN.txt
+  POCKET_CONSUMER_KEY:
+    file: ${HOME}/data/keyword-matcher/POCKET_CONSUMER_KEY.txt
