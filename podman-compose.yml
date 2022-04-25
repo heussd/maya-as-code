@@ -28,7 +28,7 @@ services:
         #    restart: unless-stopped
         #
   news-keyword-matcher:
-    image: heussd/news-keyword-matcher
+    image: docker.io/heussd/news-keyword-matcher
     labels:
       io.containers.autoupdate: registry
     environment:
@@ -50,7 +50,7 @@ services:
 
 
   news-retrieval:
-    image: "heussd/news-retrieval"
+    image: "docker.io/heussd/news-retrieval"
     privileged: true # Required for sleep(!) on ARM Linux (?!)
     volumes:
       - '${HOME}/data/newsboat:/data/:delegated'
@@ -66,7 +66,7 @@ services:
       
   fullfeedrss:
     restart: always
-    image: "heussd/fivefilters-full-text-rss:latest"
+    image: "docker.io/heussd/fivefilters-full-text-rss:latest"
     labels:
       io.containers.autoupdate: registry
     volumes:
