@@ -33,6 +33,7 @@ services:
       io.containers.autoupdate: registry
     environment:
       - "RELOAD_EVERY=30m"
+      - "ENABLE_POCKET=1"
     volumes:
       - type: bind
         source: ${HOME}/data/newsboat/news.db
